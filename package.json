@@ -1,6 +1,6 @@
 {
-  "name": "start-server-webpack-plugin",
-  "version": "2.2.5",
+  "name": "start-server-webpack-plugin-2",
+  "version": "1.0.0",
   "description": "Automatically start your server once Webpack's build completes.",
   "main": "dist/StartServerPlugin.js",
   "files": [
@@ -29,9 +29,9 @@
   "author": "Eric Clemmons <eric@smarterspam.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ericclemmons/start-server-webpack-plugin/issues"
+    "url": "https://github.com/qiqiboy/start-server-webpack-plugin/issues"
   },
-  "homepage": "https://github.com/ericclemmons/start-server-webpack-plugin#readme",
+  "homepage": "https://github.com/qiqiboy/start-server-webpack-plugin#readme",
   "gsv": {
     "majorLabel": "Version: Major",
     "minorLabel": "Version: Minor",
