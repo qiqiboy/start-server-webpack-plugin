@@ -1,5 +1,6 @@
 import cluster from 'cluster';
 import path from 'path';
+import chalk from 'chalk';
 
 export default class StartServerPlugin {
     constructor(options) {
@@ -15,7 +16,8 @@ export default class StartServerPlugin {
             {
                 signal: false,
                 // Only listen on keyboard in development, so the server doesn't hang forever
-                keyboard: process.env.NODE_ENV === 'development'
+                keyboard: process.env.NODE_ENV === 'development',
+                restartText: 'Restarting app...\n'
             },
             options
         );
@@ -37,7 +39,12 @@ export default class StartServerPlugin {
 
             process.stdin.on('data', data => {
                 if (data.trim() === 'rs') {
-                    console.log('Restarting app...');
+                    if (this.options.spinner) {
+                        this.options.spinner.succeed(chalk.green(this.optiosn.restartText));
+                    } else {
+                        console.log(chalk.green(this.optiosn.restartText));
+                    }
+
                     process.kill(this.worker.process.pid);
 
                     this._startServer(worker => {
@@ -132,7 +139,7 @@ export default class StartServerPlugin {
         let { existsAt } = compilation.assets[name];
 
         if (!existsAt) {
-            existsAt = path.join(compilation.options.output.path, name)
+            existsAt = path.join(compilation.options.output.path, name);
         }
 
         this._entryPoint = existsAt;
@@ -166,10 +173,10 @@ export default class StartServerPlugin {
             if (!this.callFirstStartCallback) {
                 this.callFirstStartCallback = true;
 
-                this.options.onServerFisrtStart && this.options.onServerFisrtStart()
+                this.options.onServerFisrtStart && this.options.onServerFisrtStart();
             }
 
-            this.options.onServerStart && this.options.onServerStart()
+            this.options.onServerStart && this.options.onServerStart();
         });
 
         cluster.fork();
