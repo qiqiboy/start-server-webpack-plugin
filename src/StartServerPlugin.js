@@ -168,6 +168,8 @@ export default class StartServerPlugin {
 
                 this.options.onServerFisrtStart && this.options.onServerFisrtStart()
             }
+
+            this.options.onServerStart && this.options.onServerStart()
         });
 
         cluster.fork();
