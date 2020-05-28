@@ -162,6 +162,12 @@ export default class StartServerPlugin {
 
         cluster.on('online', worker => {
             callback(worker);
+
+            if (!this.callFirstStartCallback) {
+                this.callFirstStartCallback = true;
+
+                this.options.onServerFisrtStart && this.options.onServerFisrtStart()
+            }
         });
 
         cluster.fork();
